@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-i3%x_84_fn0$^s&g5cg*$=3rngcf@nkgfta^b1e$q&l4mwadwn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['edkids.online']
 
 TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
 
