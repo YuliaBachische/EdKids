@@ -1,0 +1,1 @@
+import{j as s,c as t}from"./index-7cf5c50d.js";const c="_containerList_1zkd5_1",a={containerList:c},o=({className:n,name:i,appVariable:e,lvl:r})=>s.jsxs("ul",{className:t(a.containerList,{},[n]),children:[s.jsx("li",{children:s.jsx("span",{children:i})}),s.jsx("li",{children:s.jsx("span",{children:e})}),s.jsx("li",{children:s.jsx("span",{children:r})})]});export{o as C};
