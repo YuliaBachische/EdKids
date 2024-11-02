@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-i3%x_84_fn0$^s&g5cg*$=3rngcf@nkgfta^b1e$q&l4mwadwn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['edkids.online']
+ALLOWED_HOSTS = ['edkids.online', '127.0.0.1']
 
 TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
 
@@ -57,7 +57,7 @@ ROOT_URLCONF = "EdKids.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, 'templates')],
+        "DIRS": [os.path.join(BASE_DIR, 'api/templates')],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -114,12 +114,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "static/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static/assets')]
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = "/static/"
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = "staticfiles"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-LOGIN_REDIRECT_URL = "static/assets/index-7cf5c50d.js"
+LOGIN_REDIRECT_URL = "/index.html"

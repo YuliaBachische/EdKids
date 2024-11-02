@@ -1,30 +1,16 @@
 from asgiref.sync import sync_to_async
 from django.contrib.auth import login
+from django.contrib.auth.models import User
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, ContextTypes
-from .models import User
 
-
-class UserLoginHandler:
-    def __init__(self):
-        # This could hold any necessary attributes, like request context if needed
-        pass
-
-    async def login_user(self, chat_id: int, username: str):
-        # Get or create the user
-        user, created = await sync_to_async(User.objects.get_or_create)(
-            chat_id=chat_id, defaults={'username': username}
-        )
-
-        # Here we simulate a login by directly returning the user
-        return user
+from .views import register
 
 
 class TelegramBot:
     def __init__(self, token):
         self.application = ApplicationBuilder().token(token).build()
         self._setup_handlers()
-        self.login_handler = UserLoginHandler()
 
     def _setup_handlers(self):
         self.application.add_handler(CommandHandler("start", self.start))
@@ -33,11 +19,14 @@ class TelegramBot:
     async def start(self, update: Update, context: ContextTypes.DEFAULT_TYPE):
         chat_id = update.effective_chat.id
         username = update.effective_user.username
+        password = str(chat_id)
 
         user, created = await sync_to_async(User.objects.get_or_create)(
-            chat_id=chat_id, defaults={'username': username}
+            username=username, password=password
         )
-        user = await self.login_handler.login_user(chat_id, username)
+        print(username)
+        print(chat_id)
+        register(user)
 
         keyboard = [[InlineKeyboardButton("Play", url="https://edkids.online")]]
         reply_markup = InlineKeyboardMarkup(keyboard)

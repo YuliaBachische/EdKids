@@ -1,11 +1,16 @@
-from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
-class User(models.Model):
-    chat_id = models.CharField(max_length=255, unique=True)
-    username = models.CharField(max_length=255, blank=True, null=True)
+class Course(models.Model):
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    age_recommendation = models.IntegerField()
+    is_premium = models.BooleanField(default=False)
 
-    def __str__(self):
-        return self.username or self.chat_id
+
+class Lesson(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='lessons')
+    title = models.CharField(max_length=255)
+    content = models.TextField()
+
 
